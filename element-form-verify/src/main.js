@@ -1,13 +1,13 @@
-import Vue from 'vue'
-import App from './App.vue'
-import Antd from 'ant-design-vue'
-import 'ant-design-vue/dist/antd.css';
-import VerifyPlugin from './verify'
+import Vue from 'vue';
+import UiVerify from '@/lib/index';
+import ElementUI from 'element-ui';
+import App from './App.vue';
+import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.use(Antd)
-Vue.use(VerifyPlugin)
-Vue.config.productionTip = false
+Vue.use(UiVerify);
+Vue.use(ElementUI);
+Vue.config.productionTip = false;
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  render: (h) => h(App),
+}).$mount('#app');
