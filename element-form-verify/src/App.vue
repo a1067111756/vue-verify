@@ -4,7 +4,7 @@
       <el-col :span="12">
         <p>不使用插件校验</p>
         <el-form ref="form1" :model="form__" label-width="80px">
-          <el-form-item label="活动名称" prop="name" :verify="{ phone: true }">
+          <el-form-item label="活动名称" prop="name" :verify="{ password: [3, 10, '大写字母|数字', '大写字母|数字'] }">
             <el-input v-model="form__.name"></el-input>
           </el-form-item>
           <el-form-item label="活动区域" prop="region">
