@@ -3,9 +3,10 @@
     <el-row :gutter="80">
       <el-col :span="12">
         <p>不使用插件校验</p>
+        <p>{{ form__.name }}</p>
         <el-form ref="form1" :model="form__" label-width="80px">
-          <el-form-item label="活动名称" prop="name" :verify="{ phone: true }">
-            <el-input v-model="form__.name"></el-input>
+          <el-form-item label="活动名称" prop="name">
+            <el-input v-model="form__.name" v-number:precision="2"></el-input>
           </el-form-item>
           <el-form-item label="活动区域" prop="region">
             <el-select v-model="form__.region" placeholder="请选择活动区域">
