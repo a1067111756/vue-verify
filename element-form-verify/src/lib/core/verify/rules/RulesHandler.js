@@ -53,7 +53,7 @@ class Chain {
   }
 }
 
-// 必填校验处理节点
+// 1. 必填校验处理节点
 class OnlyRequiredHandler extends Chain {
   constructor(callObj) {
     super(callObj)
@@ -68,7 +68,7 @@ class OnlyRequiredHandler extends Chain {
   }
 }
 
-// 非必填校验处理节点
+// 2. 非必填校验处理节点
 class CanBeEmptyHandler extends Chain {
   constructor(callObj) {
     super(callObj)
@@ -85,7 +85,7 @@ class CanBeEmptyHandler extends Chain {
   }
 }
 
-// 复合校验处理节点
+// 3. 复合校验处理节点
 class ComplexHandler extends Chain {
   constructor(callObj) {
     super(callObj)
@@ -95,7 +95,7 @@ class ComplexHandler extends Chain {
     Object
       .getOwnPropertyNames(vueProps.verify)
       .map((key) => {
-        rulesTemplate[key] && this.callObj.addRule(key, vueProps[key], { 
+        rulesTemplate[key] && this.callObj.addRule(key, vueProps.verify[key], { 
             canBeEmpty: hasCompPropValue(vueProps.canBeEmpty) 
           })
         }
