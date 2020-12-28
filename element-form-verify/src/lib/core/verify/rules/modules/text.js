@@ -5,7 +5,7 @@ export const length = (len) => ({
   trigger: 'blur',
   min: parseInt(len),
   max: parseInt(len),
-  message: `请输入${len}个字符内容`
+  message: `输入内容应为${len}个字符`
 })
 
 // 最小文本长度

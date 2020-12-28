@@ -59,9 +59,11 @@ const typeStrategy = {
 
 
 // 类型校验
-export const type = (type) => ({
+export const type = (type, { canBeEmpty }) => ({
   trigger: 'blur',
   validator: (rule, value, callback) => {
+    if (canBeEmpty && !value) return callback()  
+
     const strategy = typeStrategy[type]
     return strategy.check(value)
       ? callback()

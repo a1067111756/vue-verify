@@ -1,16 +1,20 @@
 {
   "name": "element-form-verify",
   "version": "0.0.1",
-  "private": true,
+  "main": "dist/element-form-verify.umd.min.js",
+  "description": "a vue plugin for element form check",
+  "keyword": "vue element element-ui elementUi elementUI element-form element-ui-validator element-ui-verification element-ui-check",
+  "author": "chengyu",
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "test:unit": "vue-cli-service test:unit",
     "lint-fix": "eslint --fix --ext .js src",
-    "lib": "vue-cli-service build --target lib --name element-form-verify src/main.js"
+    "lib": "vue-cli-service build --target lib --name element-form-verify src/lib/index.js"
   },
   "peerDependencies": {
-    "core-js": "^3.6.5",
     "vue": "^2.6.11",
+    "core-js": "^3.6.5",
     "element-ui": "^2.14.1"
   },
   "dependencies": {},
@@ -22,13 +26,11 @@
     "@vue/eslint-config-airbnb": "^5.0.2",
     "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.1.0",
-    "core-js": "^3.6.5",
-    "element-ui": "^2.14.1",
+    "babel-plugin-component": "^1.1.1",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^6.2.2",
     "lint-staged": "^9.5.0",
-    "vue": "^2.6.11",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
