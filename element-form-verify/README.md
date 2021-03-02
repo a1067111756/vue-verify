@@ -30,21 +30,6 @@ Vue.use(ElementFormVerify)
       </el-form-item>
 ```
 
-#### 非必须校验器(canBeEmpty)
-```
-概述： canBeEmpty意指可以为空，但不是不校验的意思. 当表单字段内容为空时不进行校验放行，当表单字段
-      内容不为空时进行校验
-      
-使用场景： 非必须校验的使用场景虽然不是很常用，但是也是不少见的. eg: 手机号码字段，如果该字段不是很重要，
-      既可以设置成非必填字段，但是一旦用户输入，手机号码本身存在规则(只有11位、全是数字等)，此时是需要
-      进行校验的，非必须校验器就比较适合了
-      
-使用实例：
-      <el-form-item label="手机号码" prop="phone" :verify="{phone: true}" canBeEmpty>
-        <el-input v-model="form__.phone"></el-input>
-      </el-form-item>      
-```
-
 #### 常规校验
 ```
 概述： 常规校验则是指常见的普通校验，这些校验都归属到verify字段选项下面(这样做的目的是为了不让字段过于分散，
@@ -167,3 +152,33 @@ verify字段注明: verify接收类型包括boolean、Object，boolean类型时�
       
 ```
 
+#### 非必须校验器(canBeEmpty)
+```
+概述： canBeEmpty意指可以为空，但不是不校验的意思. 当表单字段内容为空时不进行校验放行，当表单字段
+      内容不为空时进行校验
+      
+使用场景： 非必须校验的使用场景虽然不是很常用，但是也是不少见的. eg: 手机号码字段，如果该字段不是很重要，
+      既可以设置成非必填字段，但是一旦用户输入，手机号码本身存在规则(只有11位、全是数字等)，此时是需要
+      进行校验的，非必须校验器就比较适合了
+      
+使用实例：
+  <el-form-item label="手机号码" prop="phone" :verify="{phone: true}" canBeEmpty>
+    <el-input v-model="form__.phone"></el-input>
+  </el-form-item>      
+```
+
+#### 联动校验器(watch / triiger)
+```
+概述： 联动校验意指一个表单字段的变化引起另一个表单字段校验的触发，watch表示监听某个表单字段内容变化来触发自身的
+      校验，triiger表示当自身内容发生了变化会去触发
+      
+使用场景：联动校验的使用场景比较业务型，大多是基于业务来考虑. eg: 注册账号的密码二次确认校验
+  <el-form-item label="请输入密码" prop="password" :verify="{passwordRegexp: [/^[0-9a-zA-Z]{8-16}$/>
+    <el-input v-model="form__.password"></el-input>
+  </el-form-item>      
+  
+  <el-form-item label="请二次输入密码确认" prop="repassword" watch="password" :verify="{xxxx}">
+    <el-input v-model="form__.repassword"></el-input>
+  </el-form-item>  
+  效果：当password字段改变，会触发repassword自身的校验
+```
