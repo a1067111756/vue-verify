@@ -19,6 +19,11 @@ Vue.use(ElementFormVerify)
 </el-form-item>
 ```
 
+## 关于插件与原生校验规则优先级问题
+```
+插件的校验是非侵入式的，不会影响原生校验规则，总体上其优先级是原生校验规则 > 插件校验规则，两者是可以同时使用的
+```
+
 ### 插件验证相关使用
 #### 插件的开关和入口（verify）
 ```
@@ -40,44 +45,44 @@ verify字段注明: verify接收类型包括boolean、Object，boolean类型时�
       Object类型时表示支持的常规校验选项. 当前常规校验共分为以下四类       
       
 1. 类型相关：检查输入内容类型的校验
-  a. 数字类型: 包括(正、负、0)整数&&(正、负、0)浮点数，使用 - :verify="{type: number}"
-    <el-form-item label="手机号码" prop="phone" :verify="{type: number}">
+  a. 数字类型: 包括(正、负、0)整数&&(正、负、0)浮点数，使用 - :verify="{type: 'number'}"
+    <el-form-item label="手机号码" prop="phone" :verify="{type: 'number'}">
       <el-input v-model="form__.phone"></el-input>
     </el-form-item> 
     
-  b. 整数类型, 这里判断包括(正、负、0)整数，使用 - :verify="{type: int}"
+  b. 整数类型, 这里判断包括(正、负、0)整数，使用 - :verify="{type: 'int'}"
   
-  c. 正整数类型，使用 - :verify="{type: pint}"
+  c. 正整数类型，使用 - :verify="{type: 'pint'}"
   
-  d. 正整数类型(包括0)，使用 - :verify="{type: pintw0}"
+  d. 正整数类型(包括0)，使用 - :verify="{type: 'pintw0'}"
   
-  e. 负整数类型，使用 - :verify="{type: nint}"
+  e. 负整数类型，使用 - :verify="{type: 'nint'}"
   
-  f. 负整数类型(包括0)，使用 - :verify="{type: nintw0}"
+  f. 负整数类型(包括0)，使用 - :verify="{type: 'nintw0'}"
   
-  g. 小数类型, 这里判断包括(正、负、0)浮点数，使用 - :verify="{type: float}"
+  g. 小数类型, 这里判断包括(正、负、0)浮点数，使用 - :verify="{type: 'float'}"
   
-  h. 英文字母(包括大小写)，使用 - :verify="{type: engChar}"
+  h. 英文字母(包括大小写)，使用 - :verify="{type: 'engChar'}"
   
-  i. 小写英文字母，使用 - :verify="{type: engLowerChar}"
+  i. 小写英文字母，使用 - :verify="{type: 'engLowerChar'}"
   
-  j. 大写英文字母，使用 - :verify="{type: engUpperChar}"
+  j. 大写英文字母，使用 - :verify="{type: 'engUpperChar'}"
   
-  k. 数字、英文组合，使用 - :verify="{type: engAndNum}"
+  k. 数字、英文组合，使用 - :verify="{type: 'engAndNum'}"
 
 2. 数字比较相关：对输入内容与预期大小比较的校验(只支持数字)
-  a. 数字大于，使用 - :verify="{type: gt}"
-    <el-form-item label="价格" prop="price" :verify="{gt: true}">
+  a. 数字大于，使用 - :verify="{gt: 100}"
+    <el-form-item label="价格" prop="price" :verify="{gt: 100}">
       <el-input v-model="form__.price"></el-input>
     </el-form-item> 
   
-  b. 数字大于等于，使用 - :verify="{type: gte}"
+  b. 数字大于等于，使用 - :verify="{gte: 100}"
   
-  c. 数字小于，使用 - :verify="{type: lt}"
+  c. 数字小于，使用 - :verify="{lt: 10}"
   
-  d. 数字小于等于，使用 - :verify="{type: lte}"
+  d. 数字小于等于，使用 - :verify="{lte: 10}"
   
-  e. 数字等于，使用 - :verify="{type: eq}"
+  e. 数字等于，使用 - :verify="{eq: 50}"
 
 3. 文本相关：对文本长度相关的校验
   a. 文本长度，使用 - :verify="{length: xxx}"
@@ -85,9 +90,9 @@ verify字段注明: verify接收类型包括boolean、Object，boolean类型时�
       <el-input v-model="form__.name"></el-input>
     </el-form-item>   
     
-  b. 最小文本长度，使用 - :verify="minLen: xxx"
+  b. 最小文本长度，使用 - :verify="{minLen: xxx}"
   
-  c. 最大文本长度，使用 - :verify="maxLen: xxx"
+  c. 最大文本长度，使用 - :verify="{maxLen: xxx}"
   
 4. 常用相关：常见相关场景的校验
   a. 正则验证，可以解决很多场景的验证，使用 - :verify="{regexp：正则字面量}"
@@ -170,10 +175,11 @@ verify字段注明: verify接收类型包括boolean、Object，boolean类型时�
 #### 联动校验器(watch / triiger)
 ```
 概述： 联动校验意指一个表单字段的变化引起另一个表单字段校验的触发，watch表示监听某个表单字段内容变化来触发自身的
-      校验，triiger表示当自身内容发生了变化会去触发
+      校验，trigger表示当自身内容发生了变化会去触发监听的表单字段的校验
       
-使用场景：联动校验的使用场景比较业务型，大多是基于业务来考虑. eg: 注册账号的密码二次确认校验
-  <el-form-item label="请输入密码" prop="password" :verify="{passwordRegexp: [/^[0-9a-zA-Z]{8-16}$/>
+使用场景：联动校验的使用场景比较业务型，大多是基于业务来考虑.
+  watch eg: 注册账号的密码二次确认校验
+  <el-form-item label="请输入密码" prop="password" :verify="{passwordRegexp: [/^[0-9a-zA-Z]{8-16}$/}">
     <el-input v-model="form__.password"></el-input>
   </el-form-item>      
   
@@ -181,4 +187,14 @@ verify字段注明: verify接收类型包括boolean、Object，boolean类型时�
     <el-input v-model="form__.repassword"></el-input>
   </el-form-item>  
   效果：当password字段改变，会触发repassword自身的校验
+  
+  triiger eg: 一个商品表单填写，其原价高于了销售价时，需要校验清空销售价要求用户重新填写
+  <el-form-item label="售价" prop="salePrice" :verify="{xxxxx}">
+    <el-input v-model="form__.salePrice"></el-input>
+  </el-form-item>      
+  
+  <el-form-item label="原价" prop="originalPrice" trigger="salePrice" :verify="{type: 'number'}">
+    <el-input v-model="form__.originalPrice"></el-input>
+  </el-form-item>  
+  效果：当originalPrice字段改变，会触发salePrice字段的校验  
 ```
