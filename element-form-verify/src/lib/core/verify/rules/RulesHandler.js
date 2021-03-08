@@ -95,7 +95,7 @@ class ComplexHandler extends Chain {
     Object
       .getOwnPropertyNames(vueProps.verify)
       .map((key) => {
-        rulesTemplate[key] && this.callObj.addRule(key, vueProps.verify[key], { 
+        this.callObj.addRule(key, vueProps.verify[key], { 
             canBeEmpty: hasCompPropValue(vueProps.canBeEmpty) 
           })
         }
