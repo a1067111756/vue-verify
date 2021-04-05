@@ -25,23 +25,24 @@ class RulesBuilder {
   // 获取校验规则模板
   __getRulesTemplate () {
     const customRules = this.globalOptions.customRules
-    
+
     // 未定义
     if (!customRules) {
-      return
+      return buildInRulesTemplate
     }
 
     // 检查类型
     if (Object.prototype.toString.call(customRules) !== '[object Object]') {
       console.warn(`form-verify全局自定义规则字段customRules只能是一个object, 自定义规则失效`)
+      return buildInRulesTemplate
     }
-
+    
     // 全局自定义优先级高于内置
     return {
       ...buildInRulesTemplate,
       ...customRules
     } 
-  }
+  } 
 
   // 添加校验规则
   /**
@@ -59,7 +60,7 @@ class RulesBuilder {
     // 组合规则选项和全局的选项
     const mergeOptions = { 
       ...option,
-      alias: this.globalOptions.alias 
+      errorAlias: this.globalOptions.errorAlias 
     }
 
     // 将选项值与选项注入模板规则中

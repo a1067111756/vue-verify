@@ -33,14 +33,20 @@ const verifyMixin = (globalOptions) => {
       ...JSON.parse(JSON.stringify(ruleProps)),
     },
   
-    mounted() {
-      // 检测到watch字段，添加校验监听
+    mounted () {
+      // 检测到trigger字段，添加校验监听
       if (this.watch) {
-        // console.log(this.prop)
-        this.elForm.$watch(`model.${this.prop}`, () => {
-          this.elForm.validateField(this.watch)
+        this.elForm.$watch(`model.${this.watch}`, () => {
+          this.elForm.validateField(this.prop)
         })
       }
+
+      // 检测到watch字段，添加校验监听
+      if (this.trigger) {
+        this.elForm.$watch(`model.${this.prop}`, () => {
+          this.elForm.validateField(this.trigger)
+        })
+      }      
     },
   
     methods: {

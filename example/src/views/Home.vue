@@ -1,9 +1,49 @@
 <template>
   <div class="home-page__container">
     <el-form ref="form" :model="form" label-width="80px">
-      <el-form-item label="活动名称" prop="name" :verify="{phone: true}">
-        <el-input v-model="form.name"></el-input>
-      </el-form-item>
+      <el-form-item label="密码" prop="password" :verify="{passwordRegexp: [/^[0-9a-zA-Z]{8,16}$/, '密码只能是字母数字组成8~16位字符']}">
+        <el-input v-model="form.password"></el-input>
+      </el-form-item>      
+      <el-form-item label="密码确认" prop="repassword" watch="password" :rules="[
+        {
+            trigger: 'blur',
+            required: true,
+            message: '必填项'
+        },
+        {
+            trigger: 'blur',
+            validator: (rule, value, callback) => {
+              if (this.form.repassword !== this.form.password) {
+                return callback('两次密码不一致')
+              }
+              return callback()
+            }
+        }
+      ]">
+        <el-input v-model="form.repassword"></el-input>
+      </el-form-item>  
+      <el-form-item label="售价" prop="salePrice" :verify="{ type: 'number' }" :rules="{
+        trigger: 'blur',
+        validator: (rule, value, callback) => {
+          if (!this.form.salePrice || !this.form.originPrice) {
+            return callback()
+          }
+
+          if (parseFloat(this.form.salePrice) < parseFloat(this.form.originPrice)) {
+            return callback('售价不能低于卖价')
+          }
+
+          return callback()
+        }
+      }">
+        <el-input v-model="form.salePrice"></el-input>
+      </el-form-item> 
+      <el-form-item label="原价" prop="originPrice" trigger="salePrice" :verify="{ type: 'number' }">
+        <el-input v-model="form.originPrice"></el-input>
+      </el-form-item> 
+      <el-form-item label="活动名称" prop="name2" verify>
+        <el-input v-model="form.name2" placeholder="活动名称2"></el-input>
+      </el-form-item>      
       <el-form-item label="活动区域">
         <el-select v-model="form.region" placeholder="请选择活动区域" style="width: 100%;">
           <el-option label="区域一" value="shanghai"></el-option>
@@ -44,15 +84,22 @@
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
+
+    <InputComponent></InputComponent>
   </div>
 </template>
 
 <script>
+  import InputComponent from '../components/InputComponent.vue'
+
   export default {
     name: 'Home',
-    data() {
+    components: { InputComponent }, 
+    data () {
       return {
         form: {
+          password: undefined,
+          repassword: undefined,
           region: '',
           date1: '',
           date2: '',

@@ -1,8 +1,8 @@
 // 必填项
-export const verify = (value, { alias }) => ({
+export const verify = (value, { errorAlias }) => ({
   required: true,
   trigger: ['blur', 'change'],
-  message: alias || '必填项'
+  message: errorAlias || '必填项'
 })
 
 // 非必填项

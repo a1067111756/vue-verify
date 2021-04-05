@@ -15,14 +15,14 @@ module.exports = {
         "vue"
     ],
     "rules": {
+        'no-undef': 0,
+        "no-func-assign": 0,
     },
     "globals": {
         "require": true,
         "module": true,
         "import": true,
-        "BMapGL": true,
-        "BMapGLLib": true,
-        "mapvgl": true,
-        "mapv": true
+        "define": true,
+        "globalThis": true
     }   
 };

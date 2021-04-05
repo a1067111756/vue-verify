@@ -1,7 +1,7 @@
 module.exports = {
   chainWebpack: config => {
     config.set('externals', {
-      vue: 'Vue',
+      'vue': 'Vue',
       'element-ui': 'element-ui'
     })
   }

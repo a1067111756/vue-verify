@@ -4,7 +4,6 @@
              但是这样柑橘逻辑更清晰，RulesBuilder负责规则的生成已经添加形式，RulesHandler负责规则添加的优先级顺序(顺序逻辑随业务
               变动会很大，所以单独拆出来维护)
 */
-import rulesTemplate from './index'
 import { hasCompPropValue } from '../../../helper/utils'
 
 class RulesHandler {
