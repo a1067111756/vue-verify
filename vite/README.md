@@ -246,7 +246,7 @@ verify字段注明: verify接收类型包括boolean、Object，boolean类型时�
 概述： 联动校验意指一个表单字段的变化引起另一个表单字段校验的触发，watch表示监听某个表单字段内容变化来触发自身的
       校验，trigger表示当自身内容发生了变化会去触发监听的表单字段的校验
       
-使用场景：联动校验的使用场景比较业务型，大多是基于业务来考虑.
+使用场景：联动校验的使用场景比较业务型，大多是基于业务来考虑，以下例子使用场景可能不太贴合
   watch eg: 商品的原价不低于售卖价格
     <el-form :model="form__" ref="form" label-width="100px">
       <el-form-item ref="formItem" label="原价" prop="originalPrice" verify watch="salePrice" :rules="priceVerify">
@@ -288,13 +288,44 @@ verify字段注明: verify接收类型包括boolean、Object，boolean类型时�
     }    
   效果：当售价字段内容被改变时，会触发原价字段进行价格比价的校验，达到提醒售价设置不能低于原价的场景
   
-  triiger eg: 一个商品表单填写，其原价高于了销售价时，需要校验清空销售价要求用户重新填写
-  <el-form-item label="售价" prop="salePrice" :verify="{xxxxx}">
-    <el-input v-model="form__.salePrice"></el-input>
-  </el-form-item>      
+  triiger eg: 用户注册第二次密码输入和第一次保持一致
+    <el-form :model="form__" ref="form" label-width="100px">
+      <el-form-item ref="passwordFormItem" label="密码" prop="password" verify :rules="passwordVerify">
+        <el-input v-model="form__.password" placeholder="请输入密码"></el-input>
+      </el-form-item> 
+
+      <el-form-item ref="repassowrdFormItem" label="确认密码" prop="repassowrd" verify trigger="password">
+        <el-input v-model="form__.repassowrd" placeholder="请再一次输入密码确认"></el-input>
+      </el-form-item>
+
+      <el-form-item>
+        <el-button class="watch-component-but__submit" type="primary" @click="onSubmit">注册</el-button> 
+      </el-form-item> 
+    </el-form>    
   
-  <el-form-item label="原价" prop="originalPrice" trigger="salePrice" :verify="{type: 'number'}">
-    <el-input v-model="form__.originalPrice"></el-input>
-  </el-form-item>  
-  效果：当originalPrice字段改变，会触发salePrice字段的校验  
+    export default {
+      data () {
+        return {
+          form__: { 
+            password: undefined, 
+            repassowrd: undefined
+          },
+          passwordVerify: {
+            trigger: 'blur',
+            validator: (rule, password, callback) => {
+              if (!this.form__.repassowrd) {
+                return callback()
+              }
+
+              if (password !== this.form__.repassowrd) {
+                return callback(Error('两次输入的密码不一致!'))
+              } 
+
+              return callback()
+            }
+          }
+        }
+      }
+    }
+  效果：当repassowrd字段改变，会触发password字段的校验  
 ```

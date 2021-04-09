@@ -1,7 +1,7 @@
 <template>
   <div class="watch-component__container">
-    <el-form :model="form__" ref="form" label-width="100px" @validate="test">
-      <el-form-item ref="originFormItem" label="原价" prop="originPrice" verify :rules="priceVerify">
+    <el-form :model="form__" ref="form" label-width="100px">
+      <el-form-item ref="originFormItem" label="原价" prop="originPrice" verify watch="salePrice" :rules="priceVerify">
         <el-input v-model="form__.originPrice" placeholder="请输入商品原价"></el-input>
       </el-form-item> 
 

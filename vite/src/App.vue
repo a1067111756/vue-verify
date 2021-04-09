@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <WatchComponent></WatchComponent>
+    <TriggerComponent></TriggerComponent>
   </div>
 </template>
 
 <script>
-import WatchComponent from '@/components/WatchComponent.vue'
+import TriggerComponent from '@/components/TriggerComponent.vue'
 
 export default {
-  components: { WatchComponent }
+  components: { TriggerComponent }
 }
 </script>
 
