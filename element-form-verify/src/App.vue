@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TestComponent from './components/TestComponent'
+import TestComponent from '@/components/TestComponent/index.vue'
 
 export default {
   components: { TestComponent }

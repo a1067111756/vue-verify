@@ -2,7 +2,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 
 import ElementUI from 'element-ui'
-import ElementFormVerify from '../../../dist/element-form-verify.umd.min'
+import ElementFormVerify from '../../../dist/element-form-verify.umd.js'
 import InputComponent from '@/components/InputComponent.vue'
 
 const localVue = createLocalVue()
@@ -28,7 +28,7 @@ describe('插件 -> 通用常见校验相关测试', () => {
     const FormItemWrapper = InputWrapper.findComponent({ ref: 'formItem' })
     const SubmitBut = InputWrapper.find('.input-component-but__submit')
 
-    // 设置校验相关参数
+    // 设置校验相关参数 
     FormItemWrapper.setProps({ verify: { wphone: true } })
 
     // 1. 验证form组件从未抛出校验事件

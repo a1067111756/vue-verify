@@ -2,7 +2,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 
 import ElementUI from 'element-ui'
-import ElementFormVerify from '../../../dist/element-form-verify.umd.min'
+import ElementFormVerify from '../../../dist/element-form-verify.umd.js'
 import InputComponent from '@/components/InputComponent.vue'
 
 const localVue = createLocalVue()

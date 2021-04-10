@@ -54,6 +54,7 @@ class RulesBuilder {
   addRule (ruleKey, ruleValue, option) {
     // 校验模板中无该选项，直接返回，不做处理
     if (!this.rulesTemplate[ruleKey]) {
+      console.log(`校验器中无此验证选项：${ ruleKey }，请检查，该条校验被忽略!`)
       return this
     }
 

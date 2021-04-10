@@ -13,4 +13,4 @@ export const verify = (value, { errorAlias }) => ({
 export const canBeEmpty = () => ({
   required: false,
   trigger: 'blur'
-});
+})

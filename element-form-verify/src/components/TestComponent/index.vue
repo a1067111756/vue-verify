@@ -1,7 +1,7 @@
 <template>
   <div class="input-component__container">
     <el-form :model="form__" ref="form" label-width="100px">
-      <el-form-item ref="formItem" label="测试项" prop="value" :verify="{ regexp: [/^[0-9a-z]$/, '只能输入数字与字母'] }">
+      <el-form-item ref="formItem" label="测试项" prop="value" :verify="{ test: true }">
         <el-input v-model="form__.value" placeholder=""></el-input>
       </el-form-item> 
 
