@@ -1,8 +1,8 @@
 <template>
   <div class="input-component__container">
     <el-form :model="form__" ref="form" label-width="100px">
-      <el-form-item ref="formItem" label="测试项" prop="value" :verify="{ test: true }">
-        <el-input v-model="form__.value" placeholder=""></el-input>
+      <el-form-item ref="formItem" label="测试项" prop="value" :verify="{ arrayNotEmpty: '图片数量不能为0' }">
+        <span>{{ form__.value }}</span>
       </el-form-item> 
 
       <el-form-item>
@@ -17,7 +17,7 @@
     name: 'InputComponent',
     data () {
       return {
-        form__: { value: '' }
+        form__: { value: [] }
       }
     },
     methods: {
