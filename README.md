@@ -34,9 +34,10 @@
 [校验使用方法](https://github.com/a1067111756/vue-verify/tree/master/element-form-verify)
 
 ### 版本控制
-[版本更新记录](https://github.com/a1067111756/vue-verify/tree/master/element-form-verify)
+[版本更新记录](https://github.com/a1067111756/vue-verify/blob/master/VERSION.md)
 ```
-当前版本是0.2.0，经过几个项目的迭代测试，以及测试用例补全，插件显而易见的bug已经剔除，接口选项已经趋于稳定不会有过大的摧毁性改动，但还是请使用者锁定安装版本。
+当前版本是0.0.2，经过几个项目的迭代测试，以及测试用例补全，插件显而易见的bug已经剔除，接口选项已经趋于稳定不会有过大的摧毁性改动，
+但还是请使用者锁定安装版本。
 
 0.2.0 版本计划：
   1. 将当前规则分类进行全面排查整理，查漏补缺
