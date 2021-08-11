@@ -22,7 +22,7 @@ export default defineConfig({
       output: {
         globals: {
           'vue': 'Vue',
-          'element-ui': 'ElementUI'
+          'element-plus': 'ElementPlus'
         }
       }
     }

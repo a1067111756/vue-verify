@@ -6,5 +6,5 @@ import ElementFormVerify from '@/lib/index.js'
 
 createApp(App)
     .use(ElementPlus)
-    // .use(ElementFormVerify)
+    .use(ElementFormVerify)
     .mount('#app')

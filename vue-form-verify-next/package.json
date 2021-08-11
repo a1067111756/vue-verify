@@ -1,7 +1,9 @@
 {
   "name": "vue-form-verify-next",
   "version": "0.0.1",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/vue-form-verify-next.umd.js",
   "module": "./dist/vue-form-verify-next.es.js",
   "exports": {

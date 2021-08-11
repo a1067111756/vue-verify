@@ -1,28 +1,38 @@
 <template>
-  <el-form  :model="formData">
-    <el-form-item ref="formRef" label="活动名称" prop="input1" required>
+  <el-form :model="formData" :rules="rules">
+    <el-form-item-verify ref="formRef" label="活动名称" prop="input1" verify :rules="rules">
       <el-input v-model="formData.input1" />
-    </el-form-item>
+    </el-form-item-verify>
+
+    <el-button @click="test">测试</el-button>
   </el-form>
 </template>
 
-<script lang="ts" setup>
-import {onMounted, ref, reactive} from "vue";
+<script lang="ts">
+import {reactive, defineComponent, ref, onMounted} from "vue";
 
-  const formData = reactive({
-    input1: ''
-  })
+export default defineComponent({
+  name: 'App',
+  setup () {
+    const formRef = ref()
+    const formData = reactive({
+      input1: ''
+    })
 
-  const rules = {
-    input1: [
-      { required: true, message: '请输入活动名称', trigger: 'blur' }
-    ]
+    const rules = { required: true, message: '请输入活动名称', trigger: 'blur' }
+
+    const test = () => {
+      console.log(formRef.value)
+    }
+
+    return {
+      test,
+      rules,
+      formRef,
+      formData,
+    }
   }
-
-  const formRef = ref()
-  onMounted(() => {
-    // console.log(formRef.value)
-  })
+})
 </script>
 
 <style>
