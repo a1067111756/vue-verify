@@ -1,0 +1,44 @@
+{
+  "root": true,
+  "env": {
+    "es2021": true,
+    "node": true,
+    "browser": false
+  },
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-essential",
+    "eslint:recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "ignorePatterns": [
+    "types/env.d.ts",
+    "node_modules/**",
+    "**/dist/**"
+  ],
+  "globals": {
+    "VERIFY_TYPE": true
+  },
+  "rules": {
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/no-explicit-any": ["off"],
+    "comma-dangle": [
+      "warn",
+      "never"
+    ],
+    "quotes": [
+      "warn", "single"
+    ]
+  }
+}

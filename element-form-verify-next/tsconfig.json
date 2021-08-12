@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "strict": false,
+    "strict": true,
     "skipLibCheck": true,
     "baseUrl": ".",
     "target": "esnext",
@@ -8,6 +8,7 @@
     "moduleResolution": "node",
     "jsx": "preserve",
     "sourceMap": true,
+    "noImplicitAny": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],

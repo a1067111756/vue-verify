@@ -3,10 +3,10 @@ import buildInRulesTemplate from './index'
 import RulesHandler from './RulesHandler'
 
 class Rules {
-  constructor (builder) {
+  constructor (builder: RulesBuilder) {
     Object
       .keys(builder.rules)
-      .map((key) => (this[key] = builder.rules[key]))
+      .map((key: string) => (this[key] = builder.rules[key]))
   }
 
   getRules() {
@@ -15,16 +15,24 @@ class Rules {
 }
 
 class RulesBuilder {
-  constructor (props, globalOptions) {
-    this.rules = {} // 规则集合
-    this.vueProps = props // vue模板上注入的字段
-    this.globalOptions = globalOptions // 插件注入的全局选项
-    this.rulesTemplate = this.__getRulesTemplate() // 校验规则模板
+  // 规则集合
+  rules: { [key: string]: any } = {}
+  // 组件注入的props
+  private readonly vueProps: VERIFY_TYPE.IVerifyProps
+  // 插件注入的全局选项
+  private readonly globalOptions: VERIFY_TYPE.IGlobalOption
+  // 校验规则
+  private readonly rulesTemplate: VERIFY_TYPE.IVerifyRule
+  
+  constructor (props: VERIFY_TYPE.IVerifyProps, globalOptions: VERIFY_TYPE.IGlobalOption) {
+    this.vueProps = props
+    this.globalOptions = globalOptions
+    this.rulesTemplate = this.__getRulesTemplate()
   }
 
   // 获取校验规则模板
   __getRulesTemplate () {
-    const customRules = this.globalOptions.customRules
+    const customRules: VERIFY_TYPE.IVerifyRule | undefined = this.globalOptions.customRules
 
     // 未定义
     if (!customRules) {
@@ -33,7 +41,7 @@ class RulesBuilder {
 
     // 检查类型
     if (Object.prototype.toString.call(customRules) !== '[object Object]') {
-      console.warn(`form-verify全局自定义规则字段customRules只能是一个object, 自定义规则失效`)
+      console.warn('form-verify全局自定义规则字段customRules只能是一个object, 自定义规则失效')
       return buildInRulesTemplate
     }
     
@@ -51,7 +59,7 @@ class RulesBuilder {
    * @param { Any } ruleValue - 规则策略value
    * @param { Object } [option] - 其它选项，需要传递给校验模板的信息(canBeEmpty、alise等)
    */
-  addRule (ruleKey, ruleValue, option) {
+  addRule (ruleKey: string, ruleValue?: any, option?: Record<string, any>) {
     // 校验模板中无该选项，直接返回，不做处理
     if (!this.rulesTemplate[ruleKey]) {
       console.log(`校验器中无此验证选项：${ ruleKey }，请检查，该条校验被忽略!`)

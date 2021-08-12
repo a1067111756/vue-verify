@@ -5,18 +5,21 @@
               变动会很大，所以单独拆出来维护)
 */
 import { hasCompPropValue } from '../../../helper/utils'
+import type RulesBuilder from './RulesBuilder'
 
 class RulesHandler {
-  constructor (callObj) {
-    this.__initChain(callObj)
-    this.__setProcess()
-  }
-
-  // 初始化节点
-  __initChain (callObj) {
+  private readonly onlyRequiredHandler: Chain
+  private readonly canBeEmptyHandler: Chain
+  private readonly complexHandler: Chain
+  
+  constructor (callObj: RulesBuilder) {
+    // 初始化节点
     this.onlyRequiredHandler = new OnlyRequiredHandler(callObj)
     this.canBeEmptyHandler = new CanBeEmptyHandler(callObj)
     this.complexHandler = new ComplexHandler(callObj)
+    
+    // 设置节点传递
+    this.__setProcess()
   }
 
   // 设置节点传递方式
@@ -30,35 +33,42 @@ class RulesHandler {
   */
   __setProcess () {
     this.onlyRequiredHandler.setNextHandler(this.canBeEmptyHandler)
-    this.canBeEmptyHandler.setNextHandler(this.complexHandler)  
+    this.canBeEmptyHandler.setNextHandler(this.complexHandler)
   }
 
   // 执行
-  handle (vueProps) {
+  handle (vueProps: VERIFY_TYPE.IVerifyProps) {
     this.onlyRequiredHandler.handle(vueProps)
   }
 }
 
 // 抽象节点
-class Chain {
-  constructor(callObj) {
+abstract class Chain {
+  protected readonly callObj: RulesBuilder
+  protected nextHandler: Chain | null
+  
+  protected constructor(callObj: RulesBuilder) {
     this.nextHandler = null // 下一处理节点
     this.callObj = callObj // 执行对象
   }
 
   // 设置下一处理节点
-  setNextHandler(handler) {
+  setNextHandler(handler: Chain) {
     this.nextHandler = handler
   }
+  
+  // 处理函数
+  // eslint-disable-next-line no-unused-vars
+  abstract handle(vueProps: VERIFY_TYPE.IVerifyProps): void
 }
 
 // 1. 必填校验处理节点
 class OnlyRequiredHandler extends Chain {
-  constructor(callObj) {
+  constructor(callObj: RulesBuilder) {
     super(callObj)
   }
 
-  handle(vueProps) {
+  handle(vueProps: VERIFY_TYPE.IVerifyProps) {
     if (vueProps.verify === '' || vueProps.verify === true) {
       this.callObj.addRule('verify')
     } else {
@@ -69,11 +79,11 @@ class OnlyRequiredHandler extends Chain {
 
 // 2. 非必填校验处理节点
 class CanBeEmptyHandler extends Chain {
-  constructor(callObj) {
+  constructor(callObj: RulesBuilder) {
     super(callObj)
   }
 
-  handle(vueProps) {
+  handle(vueProps: VERIFY_TYPE.IVerifyProps) {
     if (hasCompPropValue(vueProps.canBeEmpty)) {
       this.callObj.addRule('canBeEmpty')
     } else {
@@ -86,11 +96,11 @@ class CanBeEmptyHandler extends Chain {
 
 // 3. 复合校验处理节点
 class ComplexHandler extends Chain {
-  constructor(callObj) {
+  constructor(callObj: RulesBuilder) {
     super(callObj)
   }
 
-  handle(vueProps) {
+  handle(vueProps: VERIFY_TYPE.IVerifyProps) {
     Object
       .getOwnPropertyNames(vueProps.verify)
       .map((key) => {
