@@ -1,15 +1,15 @@
 {
-  "name": "vue-form-verify-next",
+  "name": "element-form-verify-next",
   "version": "0.0.1",
   "files": [
     "dist"
   ],
-  "main": "./dist/vue-form-verify-next.umd.js",
-  "module": "./dist/vue-form-verify-next.es.js",
+  "main": "./dist/element-form-verify-next.umd.js",
+  "module": "./dist/element-form-verify-next.es.js",
   "exports": {
     ".": {
-      "import": "./dist/vue-form-verify-next.es.js",
-      "require": "./dist/vue-form-verify-next.umd.js"
+      "import": "./dist/element-form-verify-next.es.js",
+      "require": "./dist/element-form-verify-next.umd.js"
     }
   },
   "auditor": "chengyu",
@@ -20,11 +20,11 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@types/node": "^16.4.13",
     "element-plus": "^1.0.2-beta.70",
     "vue": "^3.0.5"
   },
   "devDependencies": {
+    "@types/node": "^16.4.13",
     "@vitejs/plugin-vue": "^1.3.0",
     "@vue/compiler-sfc": "^3.0.5",
     "typescript": "^4.3.2",

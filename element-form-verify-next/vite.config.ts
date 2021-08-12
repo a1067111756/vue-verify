@@ -13,12 +13,12 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, './src/lib/index.js'),
-      name: 'ElementFormVerify',
+      entry: path.resolve(__dirname, './src/lib/index.ts'),
+      name: 'ElementFormVerifyNext',
       formats: ['es', 'umd', 'cjs']
     },
     rollupOptions: {
-      external: ['vue', 'element-ui'],
+      external: ['vue', 'element-plus'],
       output: {
         globals: {
           'vue': 'Vue',
