@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import {reactive, defineComponent, ref, onMounted} from "vue";
+import {reactive, defineComponent, ref} from 'vue';
 
 export default defineComponent({
   name: 'App',
@@ -29,7 +29,7 @@ export default defineComponent({
       test,
       rules,
       formRef,
-      formData,
+      formData
     }
   }
 })

@@ -5,12 +5,11 @@
 </template>
 
 <script lang="ts">
-import {ElFormItem} from 'element-plus';
-import {hasCompPropValue} from '../../helper/utils.js';
 import {computed, defineComponent, inject} from 'vue';
+import {ElFormItem} from 'element-plus';
+import {hasCompPropValue} from '@/lib/helper/utils';
 import RulesBuilder from './rules/RulesBuilder';
 import type { PropType } from 'vue';
-
 
 export default defineComponent({
   name: 'ElFormItemVerify',
@@ -38,17 +37,16 @@ export default defineComponent({
     }
   },
   setup (props, context) {
-    const globalOption = inject('elFormItemVerifyGlobalOption')
+    // 选项 - 全局注入的插件选项
+    const globalOption: VERIFY_TYPE.IGlobalOption = inject('elFormItemVerifyGlobalOption')
 
-    // 复写ui框架获取验证规则方法 - 核心方法
+    // 核心方法 - 复写ui框架获取验证规则方法
     const getRules = computed(() => {
       return hasCompPropValue(props.verify) ? getMergeRules() : undefined
     })
 
-    // 合并rules - 插件规则优先级高于ui框架规则
-    /* note
-      插件默认非侵入式，不会影响原校验方式和规则，优先级为：框架校验等级 > 插件校验等级
-     */
+    // 方法 - 合并rules - 插件规则优先级高于ui框架规则
+    // note: 插件默认非侵入式，不会影响原校验方式和规则，优先级为：框架校验等级 > 插件校验等级
     const getMergeRules = () => {
       const pluginRules = new RulesBuilder(props, globalOption).build().getRules() || []
       const formItemRules = context.attrs.rules || []

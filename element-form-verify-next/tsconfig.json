@@ -5,20 +5,19 @@
     "baseUrl": ".",
     "target": "esnext",
     "module": "esnext",
+    "declaration": true,
+    "declarationDir": "dist",
     "moduleResolution": "node",
     "jsx": "preserve",
     "sourceMap": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "suppressImplicitAnyIndexErrors": true,
     "lib": ["esnext", "dom"],
-    "types": [
-      "vite/client",
-      "node"
-    ],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "types": ["vite/client", "node"],
+    "typeRoot": ["./src/types", "./node_modules/@types"],
+    "paths": { "@/*": ["./src/*"] }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

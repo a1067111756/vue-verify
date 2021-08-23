@@ -4,9 +4,10 @@
              但是这样柑橘逻辑更清晰，RulesBuilder负责规则的生成已经添加形式，RulesHandler负责规则添加的优先级顺序(顺序逻辑随业务
               变动会很大，所以单独拆出来维护)
 */
-import { hasCompPropValue } from '../../../helper/utils'
+import { hasCompPropValue } from '@/lib/helper/utils'
 import type RulesBuilder from './RulesBuilder'
 
+// 责任链处理对象
 class RulesHandler {
   private readonly onlyRequiredHandler: Chain
   private readonly canBeEmptyHandler: Chain
@@ -31,18 +32,18 @@ class RulesHandler {
             是 ---> canBeEmptyHandler
             否 ---> complexHandler         
   */
-  __setProcess () {
+  __setProcess (): void {
     this.onlyRequiredHandler.setNextHandler(this.canBeEmptyHandler)
     this.canBeEmptyHandler.setNextHandler(this.complexHandler)
   }
 
   // 执行
-  handle (vueProps: VERIFY_TYPE.IVerifyProps) {
+  handle (vueProps: VERIFY_TYPE.IVerifyProps): void {
     this.onlyRequiredHandler.handle(vueProps)
   }
 }
 
-// 抽象节点
+// 责任链抽象节点
 abstract class Chain {
   protected readonly callObj: RulesBuilder
   protected nextHandler: Chain | null

@@ -9,6 +9,7 @@ for (const fileName in modules) {
   rulesList = {...rulesList,  ...config}
 }
 
+// 导出规则列表
 export default rulesList
 
 
