@@ -73,7 +73,7 @@ class OnlyRequiredHandler extends Chain {
     if (vueProps.verify === '' || vueProps.verify === true) {
       this.callObj.addRule('verify')
     } else {
-      this.nextHandler && this.nextHandler.handle(...arguments)
+      this.nextHandler && this.nextHandler.handle(vueProps)
     }
   }
 }
@@ -91,7 +91,7 @@ class CanBeEmptyHandler extends Chain {
       this.callObj.addRule('verify')
     }
 
-    this.nextHandler && this.nextHandler.handle(...arguments)
+    this.nextHandler && this.nextHandler.handle(vueProps)
   }
 }
 
@@ -104,14 +104,14 @@ class ComplexHandler extends Chain {
   handle(vueProps: VERIFY_TYPE.IVerifyProps) {
     Object
       .getOwnPropertyNames(vueProps.verify)
-      .map((key) => {
-        this.callObj.addRule(key, vueProps.verify[key], { 
+      .map((key: string) => {
+        this.callObj.addRule(key, (vueProps.verify?.[key]), {
             canBeEmpty: hasCompPropValue(vueProps.canBeEmpty) 
           })
         }
       )
 
-    this.nextHandler && this.nextHandler.handle(...arguments)  
+    this.nextHandler && this.nextHandler.handle(vueProps)
   }
 }
 

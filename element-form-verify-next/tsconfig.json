@@ -16,7 +16,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "node"],
-    "typeRoot": ["./src/types", "./node_modules/@types"],
+    "typeRoots": ["./src/types", "./node_modules/@types"],
     "paths": { "@/*": ["./src/*"] }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
