@@ -52,39 +52,39 @@ verify字段注明: verify接收类型包括boolean、Object，boolean类型时�
     
   注明：便于类型选项好记忆，一般p代表正、n代表负，w0表示包括0，r0表示移除0
 
-  b. 整数类型，包括(正、负、0)整数，使用 - :verify="{type: 'int'}"
+  b. 整数类型，包括(正、负、0)整数，使用 - :verify="{type: '整数'}"
 
   c. 整数类型，包括(正、负)整数，使用 - :verify="{type: 'intr0'}"
   
-  d. 正整数类型，不包括0，使用 - :verify="{type: 'pint'}"
+  d. 正整数类型，不包括0，使用 - :verify="{type: '正整数'}"
 
   e. 正整数类型，包括0，使用 - :verify="{type: 'pintw0'}"
 
-  f. 负整数类型，不包括0，使用 - :verify="{type: 'nint'}"
+  f. 负整数类型，不包括0，使用 - :verify="{type: '负整数'}"
 
   g. 负整数类型，包括0，使用 - :verify="{type: 'nintw0'}"
 
-  h. 小数类型，包括(正、负)浮点数，使用 - :verify="{type: 'float'}"
+  h. 小数类型，包括(正、负)浮点数，使用 - :verify="{type: '小数'}"
   
   i. 小数类型，包括0 && (正、负)浮点数，使用 - :verify="{type: 'floatw0'}"
   
-  j. 正小数类型，不包括0，使用 - :verify="{type: 'pfloat'}"
+  j. 正小数类型，不包括0，使用 - :verify="{type: '正小数'}"
 
   k. 正小数类型，包括0，使用 - :verify="{type: 'pfloatw0'}"
   
-  l. 负小数类型，不包括0，使用 - :verify="{type: 'nfloat'}"
+  l. 负小数类型，不包括0，使用 - :verify="{type: '负小数'}"
 
   m. 负小数类型，包括0，使用 - :verify="{type: 'nfloatw0'}"
 
-  n. 英文字母(包括大小写)，使用 - :verify="{type: 'engChar'}"
+  n. 英文字母(包括大小写)，使用 - :verify="{type: '字母'}"
 
-  o. 小写英文字母，使用 - :verify="{type: 'engLowerChar'}"
+  o. 小写英文字母，使用 - :verify="{type: '小写字母'}"
   
-  p. 大写英文字母，使用 - :verify="{type: 'engUpperChar'}"
+  p. 大写英文字母，使用 - :verify="{type: '大写字母'}"
 
-  q. 中文，使用 - :verify="{type: 'chineseChar'}"
+  q. 中文，使用 - :verify="{type: '中文'}"
 
-  r. 特殊字符，使用 - :verify="{type: 'specialChar'}"
+  r. 特殊字符，使用 - :verify="{type: '特殊字符'}"
      注明：特殊字符包括常见的[.,!#$%^&*@_+-/?]
 
   s. 自选类型组合，使用 - :verify="{typeOptions: ['字母|数字', '数字']}"
