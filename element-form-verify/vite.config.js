@@ -13,7 +13,7 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, './src/lib/index.ts'),
+      entry: path.resolve(__dirname, './src/lib/index.js'),
       name: 'ElementFormVerify',
       formats: ['es', 'umd', 'cjs']
     },
@@ -26,5 +26,5 @@ export default defineConfig({
         }
       }
     }
-  }  
+  }
 })
